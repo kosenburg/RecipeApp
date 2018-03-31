@@ -1,6 +1,6 @@
-package com.guru.mvc.gurumvc.repositories;
+package com.webapps.recipe.repositories;
 
-import com.guru.mvc.gurumvc.domain.UnitOfMeasure;
+import com.webapps.recipe.domain.UnitOfMeasure;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

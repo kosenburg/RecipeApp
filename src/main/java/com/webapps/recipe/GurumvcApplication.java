@@ -1,4 +1,4 @@
-package com.guru.mvc.gurumvc;
+package com.webapps.recipe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

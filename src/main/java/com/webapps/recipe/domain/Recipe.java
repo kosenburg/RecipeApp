@@ -1,4 +1,4 @@
-package com.guru.mvc.gurumvc.domain;
+package com.webapps.recipe.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -123,8 +123,16 @@ public class Recipe {
         return notes;
     }
 
-    public void setNotes(Notes notes) {
+    public Recipe setNotes(Notes notes) {
         this.notes = notes;
+        notes.setRecipe(this);
+        return this;
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+        ingredient.setRecipe(this);
+        return this;
     }
 
     public Difficulty getDifficulty() {

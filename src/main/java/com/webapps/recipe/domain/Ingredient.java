@@ -1,4 +1,4 @@
-package com.guru.mvc.gurumvc.domain;
+package com.webapps.recipe.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -24,6 +24,12 @@ public class Ingredient {
         this.amount = amount;
         this.uom = uom;
         this.recipe = recipe;
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
     }
 
     public Long getId() {

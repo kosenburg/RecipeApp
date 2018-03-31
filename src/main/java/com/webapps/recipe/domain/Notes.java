@@ -1,4 +1,4 @@
-package com.guru.mvc.gurumvc.domain;
+package com.webapps.recipe.domain;
 
 import javax.persistence.*;
 

@@ -1,17 +1,18 @@
-package com.guru.mvc.gurumvc.domain;
+package com.webapps.recipe.domain;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class Category {
+public class UnitOfMeasure {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
 
-    @ManyToMany(mappedBy = "categories")
-    private Set<Recipe> recipes;
 
     public Long getId() {
         return id;
@@ -29,11 +30,6 @@ public class Category {
         this.description = description;
     }
 
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
 
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
+
 }

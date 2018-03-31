@@ -1,6 +1,6 @@
-package com.guru.mvc.gurumvc.services;
+package com.webapps.recipe.services;
 
-import com.guru.mvc.gurumvc.domain.Recipe;
+import com.webapps.recipe.domain.Recipe;
 
 import java.util.Set;
 

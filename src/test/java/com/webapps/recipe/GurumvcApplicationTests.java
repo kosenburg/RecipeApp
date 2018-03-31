@@ -1,4 +1,4 @@
-package com.guru.mvc.gurumvc;
+package com.webapps.recipe;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
