@@ -55,4 +55,24 @@ public class IngredientToIngredientCommandTest {
         assertEquals(UOM_ID, ingredientCommand.getUnitOfMeasure().getId());
 
     }
+
+    @Test
+    public void convertWithEmptyUom() {
+        // given
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(ID);
+        ingredient.setDescription(DESC);
+        ingredient.setAmount(AMT);
+        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
+        unitOfMeasure.setId(UOM_ID);
+        ingredient.setUom(null);
+
+        // when
+        IngredientCommand ingredientCommand = converter.convert(ingredient);
+
+        // then
+        assertEquals(ID, ingredientCommand.getId());
+        assertEquals(DESC, ingredientCommand.getDescription());
+        assertEquals(AMT, ingredientCommand.getAmount());
+    }
 }

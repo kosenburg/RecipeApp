@@ -7,14 +7,26 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 
 public class IngredientToIngredientCommand implements Converter<Ingredient, IngredientCommand> {
-    public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommandTest) {
+    private UnitOfMeasureToUnitOfMeasureCommand uomConverter;
 
+    public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand) {
+        this.uomConverter = unitOfMeasureToUnitOfMeasureCommand;
     }
 
     @Synchronized
     @Nullable
     @Override
     public IngredientCommand convert(Ingredient ingredient) {
-        return null;
+        if (ingredient == null) {
+            return null;
+        }
+
+        final IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setId(ingredient.getId());
+        ingredientCommand.setDescription(ingredient.getDescription());
+        ingredientCommand.setAmount(ingredient.getAmount());
+        ingredientCommand.setUnitOfMeasure(uomConverter.convert(ingredient.getUom()));
+
+        return ingredientCommand;
     }
 }
