@@ -1,5 +1,8 @@
 package com.webapps.recipe.services;
 
+import com.webapps.recipe.command.RecipeCommand;
+import com.webapps.recipe.converters.RecipeCommandToRecipe;
+import com.webapps.recipe.converters.RecipeToRecipeCommand;
 import com.webapps.recipe.domain.Recipe;
 import com.webapps.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -21,11 +24,17 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -54,5 +63,27 @@ public class RecipeServiceImplTest {
 
         assertEquals(recipeSet.size(),1);
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getCommandById() {
+        Long id = 2L;
+
+        Recipe recipe = new Recipe();
+        recipe.setId(id);
+        when(recipeService.findById(anyLong())).thenReturn(recipe);
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(id);
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+
+        RecipeCommand returnedCommand = recipeService.findCommandById(id);
+
+        assertNotNull("Null recipe command returned", returnedCommand);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
+
+        assertEquals(recipe.getId(), returnedCommand.getId());
+        assertEquals(recipeCommand.getId(), returnedCommand.getId());
     }
 }
