@@ -67,11 +67,13 @@ public class RecipeServiceImplTest {
 
     @Test
     public void getCommandById() {
-        Long id = 2L;
+        Long id = 1L;
 
         Recipe recipe = new Recipe();
         recipe.setId(id);
-        when(recipeService.findById(anyLong())).thenReturn(recipe);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
 
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(id);
@@ -85,5 +87,14 @@ public class RecipeServiceImplTest {
 
         assertEquals(recipe.getId(), returnedCommand.getId());
         assertEquals(recipeCommand.getId(), returnedCommand.getId());
+    }
+
+    @Test
+    public void deleteById() {
+        Long idToDelete = 1L;
+        recipeService.deleteById(idToDelete);
+
+        verify(recipeRepository, times(1)).deleteById(anyLong());
+
     }
 }
