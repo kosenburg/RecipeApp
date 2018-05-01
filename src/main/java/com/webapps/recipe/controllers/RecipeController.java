@@ -1,9 +1,7 @@
 package com.webapps.recipe.controllers;
 
-import com.webapps.recipe.command.CategoryCommand;
 import com.webapps.recipe.command.RecipeCommand;
 import com.webapps.recipe.exceptions.NotFoundException;
-import com.webapps.recipe.services.CategoryService;
 import com.webapps.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class RecipeController {
 
     private RecipeService recipeService;
-    private CategoryService categoryService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
@@ -33,9 +30,7 @@ public class RecipeController {
     public String newRecipe(Model model) {
         model.addAttribute("recipe", new RecipeCommand());
 
-        //init category
 
-//        model.addAttribute("categoryList",  categoryService.listAllCategories());
         return "recipe/recipeform";
     }
 

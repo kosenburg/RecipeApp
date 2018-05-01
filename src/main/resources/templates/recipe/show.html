@@ -43,13 +43,14 @@
                                     <li th:remove="all">cat one</li>
                                     <li th:remove="all">cat two</li>
                                     <li th:each="category : ${recipe.categories}"
-                                        th:text="${category.getDescription()}"> cat three
+                                        th:text="${category.getDescription()}">cat three
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
-                                <img src="../../static/images/guacamole400x400WithX.jpg"
-                                     th:src="@{'/recipe/' + ${recipe.getId()} + '/recipeimage'}"
+                                <!--TODO:Fix static image on show-->
+                                <img src="static/img/static-recipe.png"
+                                     th:src="@{'/recipe/' + ${recipe.getId()} + '/recipe-image.jpg'}"
                                      width="200" height="200">
                             </div>
                         </div>
@@ -69,12 +70,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p th:text="'Source: ' + ${recipe.source}">Source: 30 min</p>
+                                <p th:text="'Source: ' + ${recipe.source}">Source: Cooking with Us</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>URL: <a href="#" th:href="@{recipe.url}">View Original</a></p>
+                                <p>URL: <a href="#" th:href="${recipe.url}">View Original</a></p>
                             </div>
                         </div>
                     </div>
