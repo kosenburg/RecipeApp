@@ -47,12 +47,18 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-6">
-                                <!--TODO:Fix static image on show-->
-                                <img src="static/img/static-recipe.png"
-                                     th:src="@{'/recipe/' + ${recipe.getId()} + '/recipe-image.jpg'}"
-                                     width="200" height="200">
+                            <div th:if="${recipe.image == null}" class="col-md-6">
+                                <img th:src="@{/img/static-recipe.png}"
+                                     src="../../static/img/static-recipe.png"
+                                     width="200" height="200"
+                                />
                             </div>
+                                <div th:if="${recipe.image != null}" class="col-md-6">
+                                    <img src="../../static/images/guacamole400x400WithX.jpg"
+                                         th:src="@{'/recipe/' + ${recipe.getId()} + '/recipeimage'}"
+                                         width="200" height="200"
+                                    />
+                                </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
