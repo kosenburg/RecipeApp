@@ -3,6 +3,7 @@ package com.webapps.recipe.controllers;
 import com.webapps.recipe.command.RecipeCommand;
 import com.webapps.recipe.domain.Recipe;
 import com.webapps.recipe.exceptions.NotFoundException;
+import com.webapps.recipe.services.CategoryService;
 import com.webapps.recipe.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,23 +13,20 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class RecipeControllerTest {
 
     @Mock
     RecipeService recipeService;
 
+    @Mock
+    CategoryService categoryService;
     RecipeController recipeController;
     private MockMvc mockMvc;
 
@@ -36,7 +34,7 @@ public class RecipeControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeController = new RecipeController(recipeService);
+        recipeController = new RecipeController(recipeService,categoryService);
         mockMvc = MockMvcBuilders.standaloneSetup(recipeController)
                 .setControllerAdvice(new ControllerExceptionHandler())
                 .build();

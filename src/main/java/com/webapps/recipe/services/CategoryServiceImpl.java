@@ -3,11 +3,15 @@ package com.webapps.recipe.services;
 import com.webapps.recipe.command.CategoryCommand;
 import com.webapps.recipe.repositories.CategoryRepository;
 import com.webapps.recipe.converters.CategoryToCategoryCommand;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Service
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryToCategoryCommand categoryToCategoryCommand;

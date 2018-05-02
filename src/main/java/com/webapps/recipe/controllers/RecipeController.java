@@ -2,6 +2,7 @@ package com.webapps.recipe.controllers;
 
 import com.webapps.recipe.command.RecipeCommand;
 import com.webapps.recipe.exceptions.NotFoundException;
+import com.webapps.recipe.services.CategoryService;
 import com.webapps.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class RecipeController {
 
     private RecipeService recipeService;
+    private CategoryService categoryService;
 
-    public RecipeController(RecipeService recipeService) {
+
+    public RecipeController(RecipeService recipeService, CategoryService categoryService) {
         this.recipeService = recipeService;
+        this.categoryService = categoryService;
+
     }
+
 
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model) {
@@ -36,7 +42,9 @@ public class RecipeController {
 
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
+
         model.addAttribute("recipe",recipeService.findCommandById(Long.valueOf(id)));
+        model.addAttribute("categories",categoryService.listAllCategories());
         return "recipe/recipeform";
     }
 
