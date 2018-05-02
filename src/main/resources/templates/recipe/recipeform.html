@@ -38,6 +38,11 @@
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Categories:</label>
+                                    <!--select class="form-control" name="uom.id">-->
+                                    <!--<option th:each="category : ${categoryList}"-->
+                                            <!--th:value="${category.id}"-->
+                                            <!--th:text="${category.description}">American</option>-->
+                                    <!--</select>-->
                                 </div>
                                 <div class="col-md-9 form-group">
                                     <div class="radio">
@@ -67,9 +72,9 @@
                                     <label>Difficulty:</label>
                                     <select class="form-control" th:field="*{difficulty}">
                                         <option th:each="difficultyValue : ${T(com.webapps.recipe.domain.Difficulty).values()}"
-                                                th:value="${difficultyValue.name()}"
-                                                th:text="${difficultyValue.name()}"
-                                        >val</option>
+                                                               th:value="${difficultyValue.name()}"
+                                                               th:text="${difficultyValue.name()}"
+                                    >val</option>
                                     </select>
                                     <select class="form-control" th:remove="all">
                                         <option>Easy</option>
