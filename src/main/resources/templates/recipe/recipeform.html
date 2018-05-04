@@ -29,35 +29,65 @@
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">Edit Recipe Information</h1>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h1 class="panel-title">Edit Recipe Information</h1>
+                                </div>
+                                <div class="col-md-8">
+                                    <a class="btn btn-default pull-right" href="#"
+                                       th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Change Image</a>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-3 form-group">
+                                <div class="col-md-6 form-group">
                                     <label>Recipe Description:</label>
                                     <input type="text" class="form-control" th:field="*{description}"/>
+                                </div>
+                                <div th:if="${recipe.image == null}" class="col-md-6">
+                                    <img th:src="@{/img/static-recipe.png}"
+                                         src="../../static/img/static-recipe.png"
+                                         width="200" height="200"
+                                         style="float:right"
+                                    />
+                                </div>
+                                <div th:if="${recipe.image != null}" class="col-md-6">
+                                    <img src="../../static/images/guacamole400x400WithX.jpg"
+                                         th:src="@{'/recipe/' + ${recipe.getId()} + '/recipeimage'}"
+                                         width="200" height="200"
+                                         style="float:right"
+                                    />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Categories:</label>
                                 </div>
-                                <div class="col-md-9 form-group">
-                                    <div class="radio">
-                                            <!--/*@thymesVar id="categories" type="com.webapps.recipe.domain.Category"*/-->
-                                            <th:block th:each="category : ${categories}">
-                                                <input type="checkbox" name="cats" th:value="${category.id}"/>
-                                                <label th:text="${category.description}"></label>
-                                            </th:block>
+                                <div class="col-md-9 input-group">
+                                    <div class="check">
+                                        <!--Working to load previous categories-->
+                                        <!--<th:block  th:each="category : ${categoriesList}">-->
+                                                    <!--<input type="checkbox" name="cats"-->
+                                                           <!--th:value="${{category.id}}"-->
+                                                           <!--th:checked="${selectedCategories.contains(category)}"-->
+                                                           <!--th:text="${category.description}"-->
+                                                    <!--/>-->
+                                            <!--</th:block>-->
 
-                                    </div>
-                                    <div class="radio" th:remove="all">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Cat 2
-                                        </label>
+                                        <th:block  th:each="category : ${categoriesList}">
+
+                                            <input type="checkbox" name="cats"
+                                                   th:value="${category.id}"
+                                                   th:field="*{categories}"
+                                            />
+                                            <label th:for="${#ids.prev('categories')}"
+                                                   th:text="${category.description}">Description</label>
+                                        </th:block>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">

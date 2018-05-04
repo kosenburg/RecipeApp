@@ -1,6 +1,8 @@
 package com.webapps.recipe.controllers;
 
+import com.webapps.recipe.command.CategoryCommand;
 import com.webapps.recipe.command.RecipeCommand;
+import com.webapps.recipe.domain.Category;
 import com.webapps.recipe.exceptions.NotFoundException;
 import com.webapps.recipe.services.CategoryService;
 import com.webapps.recipe.services.RecipeService;
@@ -10,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @Slf4j
@@ -42,9 +47,12 @@ public class RecipeController {
 
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
+        RecipeCommand rc = recipeService.findCommandById(Long.valueOf(id));
 
-        model.addAttribute("recipe",recipeService.findCommandById(Long.valueOf(id)));
-        model.addAttribute("categories",categoryService.listAllCategories());
+
+        model.addAttribute("recipe",rc);
+        model.addAttribute("categoriesList",categoryService.listAllCategories());
+        model.addAttribute("selectedCategories",rc.getCategories());
         return "recipe/recipeform";
     }
 
