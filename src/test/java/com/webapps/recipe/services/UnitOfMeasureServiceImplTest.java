@@ -12,11 +12,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class UnitOfMeasureServiceImplTest {
 
@@ -32,6 +29,7 @@ public class UnitOfMeasureServiceImplTest {
 
         service = new UnitOfMeasureServiceImpl(unitOfMeasureRepository, unitOfMeasureToUnitOfMeasureCommand);
     }
+
     @Test
     public void listAllUoms() {
         Set<UnitOfMeasure> unitOfMeasures = new HashSet<>();

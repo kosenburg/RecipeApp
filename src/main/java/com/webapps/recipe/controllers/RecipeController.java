@@ -1,8 +1,6 @@
 package com.webapps.recipe.controllers;
 
-import com.webapps.recipe.command.CategoryCommand;
 import com.webapps.recipe.command.RecipeCommand;
-import com.webapps.recipe.domain.Category;
 import com.webapps.recipe.exceptions.NotFoundException;
 import com.webapps.recipe.services.CategoryService;
 import com.webapps.recipe.services.RecipeService;
@@ -12,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-import java.util.Set;
 
 @Controller
 @Slf4j
@@ -52,11 +47,10 @@ public class RecipeController {
 
         model.addAttribute("recipe",rc);
         model.addAttribute("categoriesList",categoryService.listAllCategories());
-        model.addAttribute("selectedCategories",rc.getCategories());
         return "recipe/recipeform";
     }
 
-
+//    TODO:Work on return of Category
     @PostMapping("recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);

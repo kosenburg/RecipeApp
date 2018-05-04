@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryCommand findCommandById(long l) {
         return categoryToCategoryCommand.convert(findById(l));    }
 
-    private Category findById(long l) {
+    public Category findById(long l) {
         Optional<Category> categoryOptional = categoryRepository.findById(l);
 
         if (!categoryOptional.isPresent()) {
