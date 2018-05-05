@@ -24,10 +24,10 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
             return null;
         }
 
-        Ingredient ingredient = new Ingredient();
-        ingredient.setAmount(ingredientCommand.getAmount());
+        final Ingredient ingredient = new Ingredient();
         ingredient.setId(ingredientCommand.getId());
         ingredient.setDescription(ingredientCommand.getDescription());
+        ingredient.setAmount(ingredientCommand.getAmount());
         ingredient.setUom(uomConverter.convert(ingredientCommand.getUom()));
 
         return ingredient;
