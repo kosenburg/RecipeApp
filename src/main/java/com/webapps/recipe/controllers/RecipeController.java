@@ -22,20 +22,24 @@ public class RecipeController {
 
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model) {
+        log.debug("Displaying recipe with id: " + id);
+
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
         return "recipe/show";
     }
 
     @GetMapping("recipe/new")
     public String newRecipe(Model model) {
+        log.debug("Getting recipe form");
+
         model.addAttribute("recipe", new RecipeCommand());
-
-
         return "recipe/recipeform";
     }
 
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
+        log.debug("Showing update form of recipe with id: " + id);
+
         model.addAttribute("recipe",recipeService.findCommandById(Long.valueOf(id)));
         return "recipe/recipeform";
     }
@@ -43,6 +47,8 @@ public class RecipeController {
 
     @PostMapping("recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
+        log.debug("Updating recipe");
+
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
@@ -59,7 +65,7 @@ public class RecipeController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {
-        log.error("Not found exception");
+        log.error("Not found exception thrown");
         log.error(exception.getMessage());
 
         ModelAndView modelAndView = new ModelAndView();

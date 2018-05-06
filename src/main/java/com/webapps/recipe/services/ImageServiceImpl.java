@@ -15,7 +15,6 @@ public class ImageServiceImpl implements ImageService {
     private final RecipeRepository recipeRepository;
 
     public ImageServiceImpl( RecipeRepository recipeService) {
-
         this.recipeRepository = recipeService;
     }
 
@@ -25,23 +24,23 @@ public class ImageServiceImpl implements ImageService {
 
         try {
             Recipe recipe = recipeRepository.findById(recipeId).get();
-
-            Byte[] byteObjects = new Byte[file.getBytes().length];
-
-            int i = 0;
-
-            for (byte b : file.getBytes()){
-                byteObjects[i++] = b;
-            }
-
-            recipe.setImage(byteObjects);
-
+            recipe.setImage(boxBytes(file));
             recipeRepository.save(recipe);
         } catch (IOException e) {
-            //todo handle better
-            log.error("Error occurred", e);
-
+            log.error("An error occurred", e);
             e.printStackTrace();
         }
+    }
+
+    private Byte[] boxBytes(MultipartFile file) throws IOException {
+        Byte[] byteObjects = new Byte[file.getBytes().length];
+
+        int i = 0;
+
+        for (byte b : file.getBytes()){
+            byteObjects[i++] = b;
+        }
+
+        return byteObjects;
     }
 }
