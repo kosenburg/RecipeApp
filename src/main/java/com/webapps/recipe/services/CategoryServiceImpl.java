@@ -21,8 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Set<CategoryCommand> listAllCategories() {
 
-            return StreamSupport.stream(categoryRepository.findAll()
-                    .spliterator(), false)
+            return StreamSupport.stream(categoryRepository.findAll().spliterator(), false)
                     .map(categoryToCategoryCommand::convert)
                     .collect(Collectors.toSet());
         }
